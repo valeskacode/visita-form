@@ -1,0 +1,154 @@
+/* =====================================================================
+   assets/style.css
+   Diseño mobile-first para la app de Visita a Clientes — Caja Arequipa
+   Paleta: rojo institucional #C8102E · azul oscuro #1B3A5C
+   ===================================================================== */
+
+:root {
+  color-scheme: light only;
+  --rojo: #C8102E;
+  --rojo-oscuro: #a30d24;
+  --azul: #1B3A5C;
+  --fondo: #F4F5F7;
+  --verde: #16A34A;
+  --verde-bg: #E8F8EE;
+  --amarillo: #D97706;
+  --amarillo-bg: #FEF6E7;
+  --gris-borde: #E2E8F0;
+}
+
+/* ---- Forzar modo claro en TODO, incluso si el celular está en oscuro --- */
+html, body, .stApp {
+  background-color: var(--fondo) !important;
+  color: var(--azul) !important;
+}
+input, textarea, select,
+div[data-baseweb="input"] > div,
+div[data-baseweb="select"] > div,
+div[data-baseweb="textarea"],
+div[data-baseweb="base-input"] {
+  background-color: #ffffff !important;
+  color: var(--azul) !important;
+  border-color: var(--gris-borde) !important;
+}
+div[data-testid="stTextInput"] input,
+div[data-testid="stNumberInput"] input,
+div[data-testid="stDateInput"] input,
+div[data-testid="stTimeInput"] input,
+div[data-testid="stTextArea"] textarea {
+  background-color: #ffffff !important;
+  color: var(--azul) !important;
+  -webkit-text-fill-color: var(--azul) !important;
+}
+.stSelectbox div[data-baseweb="select"] * { color: var(--azul) !important; }
+[data-testid="stWidgetLabel"] p { color: var(--azul) !important; font-weight: 600; }
+.streamlit-expanderHeader { color: var(--azul) !important; }
+
+/* ---- Limitar ancho en PC para que se vea como "tarjeta de celular" ---- */
+.block-container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding-top: 0.5rem !important;
+  padding-bottom: 6rem !important;  /* deja espacio para la barra inferior */
+}
+@media (min-width: 900px) {
+  .block-container { max-width: 520px; }
+}
+
+/* ---- Header superior tipo app móvil ---- */
+.app-header {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.9rem 0.2rem; margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--gris-borde);
+}
+.app-header .icon-box {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: var(--rojo); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.app-header .titles h1 {
+  font-size: 1.05rem; margin: 0; color: var(--azul); font-weight: 700;
+}
+.app-header .titles p {
+  font-size: 0.8rem; margin: 0; color: #64748B;
+}
+
+/* ---- Tarjetas blancas ---- */
+.card {
+  background: #ffffff; padding: 1.1rem 1.2rem; border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 0.9rem;
+  border: 1px solid var(--gris-borde);
+}
+.card h3 { margin-top: 0; }
+
+/* ---- Banner de cliente activo (verde, igual a mockup ficha) ---- */
+.banner-cliente {
+  background: var(--verde-bg); border: 1px solid #BBF0D2;
+  border-radius: 14px; padding: 1rem 1.1rem; margin-bottom: 0.9rem;
+}
+.banner-cliente .nombre { font-size: 1.15rem; font-weight: 700; color: var(--azul); }
+.banner-cliente .dni { font-size: 0.85rem; color: #475569; }
+
+/* ---- Badges de estado ---- */
+.badge { display: inline-block; padding: 3px 11px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; }
+.badge-ok   { background: var(--verde-bg); color: var(--verde); }
+.badge-warn { background: var(--amarillo-bg); color: var(--amarillo); }
+.badge-pend { background: #FCE8E6; color: var(--rojo); }
+
+/* ---- Paneles de criterio (riesgo) con borde de color ---- */
+.panel-riesgo-on {
+  background: #FEF2F2; border-left: 5px solid var(--rojo);
+  border-radius: 10px; padding: 0.8rem 1rem; margin-bottom: 0.6rem;
+}
+.panel-riesgo-off {
+  background: #F8FAFC; border-left: 5px solid var(--gris-borde);
+  border-radius: 10px; padding: 0.8rem 1rem; margin-bottom: 0.6rem;
+}
+
+/* ---- Botones ---- */
+div.stButton > button {
+  background-color: var(--rojo); color: white !important; border: none;
+  border-radius: 10px; font-weight: 700; padding: 0.6rem 1rem;
+}
+div.stButton > button:hover { background-color: var(--rojo-oscuro); color: white !important; }
+div.stButton > button:disabled { background-color: #D1D5DB; color: #6B7280 !important; }
+.stDownloadButton > button {
+  background-color: var(--azul) !important; color: white !important; border-radius: 10px; font-weight: 700;
+}
+
+/* ---- Stepper (pasos de la visita) ---- */
+.stepper { display: flex; justify-content: space-between; margin: 0.4rem 0 1rem 0; }
+.stepper .step { text-align: center; flex: 1; }
+.stepper .circle {
+  width: 28px; height: 28px; border-radius: 50%; margin: 0 auto 4px auto;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 700;
+  background: var(--gris-borde); color: #64748B;
+}
+.stepper .circle.activo { background: var(--azul); color: white; }
+.stepper .circle.hecho { background: var(--verde); color: white; }
+.stepper .label { font-size: 0.65rem; color: #64748B; }
+
+/* ---- Barra inferior de navegación (fija) ---- */
+.bottom-nav-spacer { height: 70px; }
+div[data-testid="stHorizontalBlock"].bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: white; border-top: 1px solid var(--gris-borde);
+  padding: 0.3rem 0.5rem; z-index: 999; max-width: 480px; margin: 0 auto;
+}
+
+/* ---- Métricas grandes ---- */
+[data-testid="stMetricValue"] { color: var(--azul); }
+
+/* ---- Contenedores nativos con borde (st.container(border=True)) ----
+   Les damos la misma apariencia de "tarjeta" que el resto del diseño. */
+div[data-testid="stVerticalBlockBorderWrapper"] {
+  border-radius: 14px !important;
+  border-color: var(--gris-borde) !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  margin-bottom: 0.7rem;
+}
+
+/* ---- Mapa pequeño ---- */
+iframe[title="st.iframe"] { border-radius: 10px; }
